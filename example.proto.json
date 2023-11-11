@@ -6,5 +6,6 @@
   ],
   "options": {
     "java_package": "com.example.foo"
-  }
+  },
+  "messages": "Person(name:TYPE_STRING;id:TYPE_INT32;email:TYPE_STRING;phones:TYPE_MESSAGE;),AddressBook(people:TYPE_MESSAGE;),EmptyMessage(empty:TYPE_MESSAGE;),"
 }

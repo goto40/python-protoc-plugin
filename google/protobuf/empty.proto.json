@@ -6,9 +6,10 @@
     "java_package": "com.google.protobuf",
     "java_outer_classname": "EmptyProto",
     "java_multiple_files": "true",
-    "go_package": "google.golang.org/protobuf/types/known/emptypb",
+    "go_package": "github.com/golang/protobuf/ptypes/empty",
     "cc_enable_arenas": "true",
     "objc_class_prefix": "GPB",
     "csharp_namespace": "Google.Protobuf.WellKnownTypes"
-  }
+  },
+  "messages": "Empty(),"
 }

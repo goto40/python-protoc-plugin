@@ -3,6 +3,7 @@
 import json
 import logging
 import sys
+from typing import Callable
 
 from google.protobuf.compiler import plugin_pb2 as plugin
 from google.protobuf.descriptor_pb2 import FileDescriptorProto
@@ -25,12 +26,36 @@ def process_file(
 
     # Create list of dependencies
     dependencies_list = list(proto_file.dependency)
+    x='';
+    for m in proto_file.message_type:
+        x+=str(m.name)
+        x+="(" #+str(dir(m))
+        for field in m.field:
+            f = field.Type
+            type_index = field.type
+            type_name = field.type_name
+            for i in field.Type.items():
+                if i[1] == type_index:
+                    type_name = str(i[0])
+            x+=f"{field.name}:{type_name}"
+            # for p in dir(f):
+            #     if not p.startswith('__'):
+            #         if isinstance(getattr(f,p), Callable):
+            #             try:
+            #                 x+=f"{p}={str(getattr(f,p)())},"
+            #             except:
+            #                 pass
+            #         else:
+            #             x+=f"{p}={str(getattr(f,p))},"
+            x+=f";"
+        x+="),"
 
     data = {
         "package": f"{proto_file.package}",
         "filename": f"{proto_file.name}",
         "dependencies": dependencies_list,
         "options": options_dict,
+        "messages": f"{x}",
     }
 
     file = response.file.add()
